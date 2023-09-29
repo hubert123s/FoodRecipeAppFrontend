@@ -1,0 +1,83 @@
+<h1>Lista posiłków</h1>
+
+<label for="pageSize">Rozmiar strony:</label>
+<select id="pageSize" #pageSizeSelect (change)="changePageSize(+pageSizeSelect.value)">
+  <option value="2">2</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+</select>
+
+
+<button (click)="changeSort('name')">Sortuj po nazwie</button>
+<button (click)="changeSort('preparationTime')">Sortuj po czasie przygotowania</button>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nazwa</th>
+    <th>Czas przygotowania</th>
+    <th>Opis</th>
+    <th>Typ posiłku</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let meal of meals">
+    <td>{{ meal.id }}</td>
+    <td>
+      <input type="text" [(ngModel)]="meal.name">
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="meal.preparationTime">
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="meal.description">
+    </td>
+    <td>{{ meal.typeMeal }}</td>
+    <td>
+      <button (click)="updateMeal(meal)"style="width: 75px;">Aktualizuj</button>
+      <button (click)="onDelete(meal.id)">Usuń</button>
+      <button (click)="getIngredientsByMealId(meal.id)">Pokaż składniki</button>
+
+    </td>
+  </tr>
+
+
+  <tr *ngIf="ingredientsByMealId && ingredientsByMealId.length">
+    <td colspan="5">
+      <ul>
+        <li *ngFor="let ingredient of ingredientsByMealId">
+          {{ ingredient.name }} - {{ ingredient.amount }}
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+
+  </tbody>
+</table>
+
+<button (click)="prevPage()">Poprzednia strona</button>
+<button (click)="nextPage()">Następna strona</button>
+
+<div class="meal-search-container">
+  <div class="search-by-name">
+    <input type="text" placeholder="Search by name" [(ngModel)]="mealName">
+    <button (click)="searchByName(mealName)">Search by Name</button>
+  </div>
+
+  <div class="search-by-ingredients">
+    <input type="text" placeholder="Search without ingredients, separated by comma" [(ngModel)]="ingredients">
+    <button (click)="searchWithoutIngredients(ingredients)">Search by Ingredients</button>
+  </div>
+
+  <div *ngFor="let meal of mealsFound">
+    <p>{{ meal.name }}</p>
+  </div>
+
+
+<div *ngFor="let meal of mealsFoundWithoutSelectedIngredients">
+  <p>{{ meal.name }}</p>
+</div>
+</div>
+
