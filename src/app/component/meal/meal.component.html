@@ -1,7 +1,7 @@
-<h1>Lista posiłków</h1>
+<h1>Lista {{ mealsSize }} posiłków</h1>
 
 <label for="pageSize">Rozmiar strony:</label>
-<select id="pageSize" #pageSizeSelect (change)="changePageSize(+pageSizeSelect.value)">
+<select id="pageSize" [(ngModel)]="selectedPageSize"  (change)="changePageSize(selectedPageSize)">
   <option value="2">2</option>
   <option value="5">5</option>
   <option value="10">10</option>
@@ -57,8 +57,9 @@
   </tbody>
 </table>
 
-<button (click)="prevPage()">Poprzednia strona</button>
-<button (click)="nextPage()">Następna strona</button>
+<button (click)="prevPage()" [disabled]="pageNumber === 0">Poprzednia strona</button>
+<button (click)="nextPage()" [disabled]="pageNumber === getRoundedMaximumNumberOfPages()">Następna strona</button>
+
 
 <div class="meal-search-container">
   <div class="search-by-name">

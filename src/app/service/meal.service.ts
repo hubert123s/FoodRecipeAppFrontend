@@ -35,7 +35,7 @@ export class MealService {
   getIngredientsByMealId(id: number): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(`${this.apiUrl}/${id}/ingredients`);
   }
-  getAmountRates() {
+  getMealsSize(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/size`);
   }
 }

@@ -14,7 +14,7 @@
       <p>Name: {{ ingredient.name }}</p>
       <p>Amount: {{ ingredient.amount }}</p>
       <p>Meal id: {{ ingredient.mealId }}</p>
-      <button (click)="deleteIngredient(ingredientId)" style="width: 75px;">Delete</button>
+      <button (click)="deleteIngredient(ingredientId)" style="width: 60px;">Usuń</button>
     </div>
   </form>
 
@@ -33,7 +33,7 @@
 
     <div style="text-align: left;">
       <label for="ingredientMealId" style="display: inline-block; width: 60px;">Meal ID:</label>
-      <input id="ingredientMealId" type="number" [(ngModel)]="newIngredient.mealId">
+      <input id="ingredientMealId" type="number" [(ngModel)]="newIngredient.mealId" min="1">
     </div>
 
     <button (click)="saveIngredient(newIngredient)" style="width: 60px;">Dodaj</button>

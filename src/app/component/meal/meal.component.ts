@@ -17,18 +17,20 @@ export class MealComponent implements OnInit {
   mealName:string = '';
   ingredients: string = '';
   pageNumber: number = 0;
-  pageSize: number = 2;
+  selectedPageSize : number = 2;
   sortBy: string = 'preparationTime';
   sortDirection: string = 'ASC';
+  mealsSize: number = 0;
 
   constructor(private mealService: MealService) { }
 
   ngOnInit(): void {
     this.fetchMeals();
+    this.getMealsSize();
   }
 
   fetchMeals() {
-    this.mealService.getAllMeals(this.pageNumber, this.pageSize, this.sortBy, this.sortDirection).subscribe(data => {
+    this.mealService.getAllMeals(this.pageNumber, this.selectedPageSize, this.sortBy, this.sortDirection).subscribe(data => {
       this.meals = data;
     });
   }
@@ -95,8 +97,16 @@ export class MealComponent implements OnInit {
   }
 
   changePageSize(size: number) {
-    this.pageSize = size;
+    this.selectedPageSize = size;
     this.pageNumber = 0;
     this.fetchMeals();
+  }
+  getMealsSize(): void {
+    this.mealService.getMealsSize().subscribe((size) => {
+      this.mealsSize = size;
+    });
+  }
+  getRoundedMaximumNumberOfPages(): number {
+    return Math.floor(this.mealsSize / this.selectedPageSize);
   }
 }
