@@ -11,7 +11,7 @@
 <button (click)="changeSort('name')">Sortuj po nazwie</button>
 <button (click)="changeSort('preparationTime')">Sortuj po czasie przygotowania</button>
 
-<table>
+<table datatable>
   <thead>
   <tr>
     <th>ID</th>
@@ -22,6 +22,7 @@
   </tr>
   </thead>
   <tbody>
+  <ng-container>
   <tr *ngFor="let meal of meals">
     <td>{{ meal.id }}</td>
     <td>
@@ -41,59 +42,6 @@
 
     </td>
   </tr>
-
-
-  <label for="pageSize">Rozmiar strony:</label>
-  <select id="pageSize2" [(ngModel)]="selectedPageSize" (change)="changePageSize(selectedPageSize)">
-    <option value="2">2</option>
-    <option value="5">5</option>
-    <option value="10">10</option>
-  </select>
-
-  <button (click)="changeSort('name')">Sortuj po nazwie</button>
-  <button (click)="changeSort('preparationTime')">Sortuj po czasie przygotowania</button>
-
-  <ngx-datatable
-    class="material"
-    [rows]="meals"
-    [columnMode]="'force'"
-    [headerHeight]="50"
-    [footerHeight]="50"
-    [rowHeight]="'auto'"
-    [externalPaging]="true"
-    [count]="totalItems"
-    [offset]="offset"
-    [limit]="selectedPageSize"
-    (page)="pageChange($event)"
-    (sort)="onSort($event)">
-    <ngx-datatable-column name="ID"></ngx-datatable-column>
-    <ngx-datatable-column name="Nazwa">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <input type="text" [(ngModel)]="row.name">
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Czas przygotowania">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <input type="text" [(ngModel)]="row.preparationTime">
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Opis">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <input type="text" [(ngModel)]="row.description">
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Akcje">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <button (click)="updateMeal(row)" style="width: 75px;">Aktualizuj</button>
-        <button (click)="onDelete(row.id)">Usuń</button>
-        <button (click)="getIngredientsByMealId(row.id)">Pokaż składniki</button>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
-
-
-
-
   <tr *ngIf="ingredientsByMealId && ingredientsByMealId.length">
     <td colspan="5">
       <ul>
@@ -104,7 +52,7 @@
     </td>
   </tr>
 
-
+</ng-container>
   </tbody>
 </table>
 
@@ -112,24 +60,19 @@
 <button (click)="nextPage()" [disabled]="pageNumber === getRoundedMaximumNumberOfPages()">Następna strona</button>
 
 
-<div class="meal-search-container">
   <div class="search-by-name">
-    <input type="text" placeholder="Search by name" [(ngModel)]="mealName">
-    <button (click)="searchByName(mealName)">Wyszukaj po nazwie</button>
+    <input type="text" placeholder="Wyszukaj po nazwie" [(ngModel)]="mealName">
+    <button (click)="searchByName(mealName)">Wyszukaj</button>
   </div>
-
-  <div class="search-by-ingredients">
-    <input type="text" placeholder="Search without ingredients, separated by comma" [(ngModel)]="ingredients">
-    <button (click)="searchWithoutIngredients(ingredients)">Wyszukaj po składnikach</button>
-  </div>
-
   <div *ngFor="let meal of mealsFound">
     <p>{{ meal.name }}</p>
   </div>
 
 
+<div class="search-by-ingredients">
+  <input type="text" placeholder="Wyszukaj posiłki bez składników" [(ngModel)]="ingredients">
+  <button (click)="searchWithoutIngredients(ingredients)">Wyszukaj</button>
+</div>
 <div *ngFor="let meal of mealsFoundWithoutSelectedIngredients">
   <p>{{ meal.name }}</p>
 </div>
-</div>
-

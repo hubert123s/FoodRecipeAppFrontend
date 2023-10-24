@@ -1,0 +1,81 @@
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+div label[for="ingredientId"] {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  width: 50px;
+
+}
+
+input#ingredientId {
+  width: 50px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+div *ngIf="ingredient" {
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+div h2 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+div label {
+  font-weight: bold;
+  display: inline-block;
+  width: 50px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 150px;;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 60px;
+  margin-top: 10px;
+}

@@ -7,6 +7,8 @@ import { SubscriberComponent } from './component/subscriber/subscriber.component
 import { IngredientComponent } from './component/ingredient/ingredient.component';
 import { MealComponent } from './component/meal/meal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxDatatableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

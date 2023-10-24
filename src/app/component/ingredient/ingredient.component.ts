@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IngredientService } from 'src/app/service/ingredient.service';
 import { FormsModule } from '@angular/forms';
 import { Ingredient} from 'src/app/model/ingredient.model';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 @Component({
   selector: 'app-ingredient',
   templateUrl: './ingredient.component.html',
@@ -10,7 +11,9 @@ import { Ingredient} from 'src/app/model/ingredient.model';
 export class IngredientComponent implements OnInit {
 
   newIngredient: Ingredient = new Ingredient();
-  ingredient: Ingredient = new Ingredient();
+//  ingredient: Ingredient = new Ingredient();
+ingredient: Ingredient | null = null;
+
   ingredientId: number|null=null;
 
   constructor(private ingredientService: IngredientService) { }

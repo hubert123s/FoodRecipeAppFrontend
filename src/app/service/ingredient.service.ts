@@ -7,7 +7,7 @@ import { Ingredient} from 'src/app/model/ingredient.model';
 })
 export class IngredientService {
 
-  private apiUrl = 'http://localhost:8080/ingredient';  // replace with your Spring Boot backend URL
+  private apiUrl = 'http://localhost:8080/ingredient';
 
   constructor(private http: HttpClient) { }
 
